@@ -5,6 +5,8 @@
 // * settings.website1.inc.php realisieren
 // * settings löschen wenn uninstall 
 // * backup der bestehenden settings datei
+// * evtl. eigene settings klasse
+// * meldungen an user wenn update oder generate etc. (per EP)
 
 // init addon
 $REX['ADDON']['name']['dummy'] = 'Dummy';
