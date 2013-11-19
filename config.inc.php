@@ -1,4 +1,11 @@
 <?php
+// todo
+// * mkdir fehlermeldung + generateSettingsFile meldungen
+// * settings array in einstellungsseite wie developer
+// * settings.website1.inc.php realisieren
+// * settings löschen wenn uninstall 
+// * backup der bestehenden settings datei
+
 // init addon
 $REX['ADDON']['name']['dummy'] = 'Dummy';
 $REX['ADDON']['page']['dummy'] = 'dummy';
@@ -11,8 +18,10 @@ $REX['ADDON']['perm']['dummy'] = 'dummy[]';
 $REX['PERM'][] = 'dummy[]';
 
 // includes
-require($REX['INCLUDE_PATH'] . '/addons/dummy/settings.inc.php');
 require($REX['INCLUDE_PATH'] . '/addons/dummy/classes/class.rex_dummy_utils.inc.php');
+
+// settings
+rex_dummy_utils::includeSettings();
 
 if ($REX['REDAXO']) {
 	// add lang file
@@ -25,4 +34,4 @@ if ($REX['REDAXO']) {
 		array('help', $I18N->msg('dummy_help'))
 	);
 }
-?>
+

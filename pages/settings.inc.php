@@ -1,25 +1,22 @@
 <?php
 
-$configFile = $REX['INCLUDE_PATH'] . '/addons/dummy/settings.inc.php';
+$settingsFile = rex_dummy_utils::getSettingsFile();
 
 if (rex_request('func', 'string') == 'update') {
 	$foo = trim(rex_request('foo', 'string'));
 
+	$REX['ADDON']['dummy']['settings']['version'] = $REX['ADDON']['version']['dummy'];
 	$REX['ADDON']['dummy']['settings']['foo'] = $foo;
 
-	$content = '
-		$REX[\'ADDON\'][\'dummy\'][\'settings\'][\'foo\'] = "' . $foo . '";
-	';
-
-	if (rex_replace_dynamic_contents($configFile, str_replace("\t", "", $content)) !== false) {
+	if (rex_dummy_utils::generateSettingsFile($REX['ADDON']['dummy']['settings'])) {
 		echo rex_info($I18N->msg('dummy_configfile_update'));
 	} else {
 		echo rex_warning($I18N->msg('dummy_configfile_nosave'));
 	}
 }
 
-if (!is_writable($configFile)) {
-	echo rex_warning($I18N->msg('dummy_configfile_nowrite'), $configFile);
+if (!is_writable($settingsFile)) {
+	echo rex_warning($I18N->msg('dummy_configfile_nowrite', $settingsFile));
 }
 ?>
 
